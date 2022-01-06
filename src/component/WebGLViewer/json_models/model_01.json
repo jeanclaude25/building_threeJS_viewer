@@ -1,0 +1,16 @@
+{
+    "building_1":{
+        "type":"model",
+        "filepath":"./models/building_01/model.glb"
+        
+    },
+    "instance_01":{
+        "type":"instance",
+        "pointCloud":"blabla.json",
+        "filepath":""
+        }
+        
+           
+            
+}
+        
