@@ -15,4 +15,29 @@ export const GlViewer = styled.div`
         rgba(255,255,255,0.6) 32px
     );
     background-repeat: repeat;
+    cursor: none;
+`
+
+export const BigCircleStyles = styled.span`
+    position: fixed;
+    border: solid 1px #ccc;
+    width: ${config.mouse.size}; 
+    height: ${config.mouse.size}; 
+    border-radius: 50%; 
+    pointer-events: none;
+    left:150px;
+    mix-blend-mode: difference;
+    z-index:50;
+`
+
+export const SmallCircleStyles = styled.span`
+    position: fixed;
+    border: solid 1px #ccc;
+    width: 4px; 
+    height: 4px; 
+    border-radius: 50%; 
+    pointer-events: none;
+    background-color: #ccc;
+    mix-blend-mode: difference;
+    z-index:50;
 `

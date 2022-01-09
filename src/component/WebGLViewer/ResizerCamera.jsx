@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useFrame, useThree } from "@react-three/fiber"
 import useResizeObserver from '@react-hook/resize-observer'
 import gsap from 'gsap/all'
+import { config } from "./config"
 
+const cam_initial = {
+    x:config.camera.position.x,
+    y:config.camera.position.y,
+    z:config.camera.position.z
+}
 
 const useSize = (target) => {
   const [size, setSize] = useState()
@@ -21,16 +27,16 @@ export const ResizerCamera = ({target}) => {
     const {mouse, viewport, camera} = useThree()
 
     useFrame(() => {
-
+        
         /**Animer la camera selon le curseur souris */
         gsap.to(
             camera.position,{
                 duration:1,
-                x:((mouse.x * viewport.width) / 40)+0.5,
-                y:((mouse.y * viewport.height) / 40)+4
+                x:((mouse.x * viewport.width) / 40) + cam_initial.x,
+                y:((mouse.y * viewport.height) / 40) + cam_initial.y
             }
         )
-        camera.lookAt(0,0,0)
+        camera.lookAt(0,-7,0)
         })
 
 

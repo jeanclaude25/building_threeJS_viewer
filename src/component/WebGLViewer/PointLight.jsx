@@ -43,7 +43,7 @@ export const PointLight = () => {
                     light.current.position,{
                         duration:1,
                         x:lightPosition[0],
-                        y:lightPosition[1]+2,
+                        y:lightPosition[1]+1,
                         z:lightPosition[2]
                     }
                 )
@@ -52,7 +52,7 @@ export const PointLight = () => {
 
     return (
         < >
-            <pointLight ref={light} distance={10} intensity={3} color="orange" />
+            <pointLight ref={light} distance={5} intensity={1.5} color="orange" />
             
             <mesh ref={rayCastMesh} name='rayCastMesh' rotation={[-Math.PI / 2,0,0]} position={[0,1,0]} >
             <planeBufferGeometry attach="geometry" args={[100,100]} />

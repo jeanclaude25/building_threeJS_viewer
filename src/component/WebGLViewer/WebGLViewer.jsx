@@ -1,11 +1,12 @@
-import React, { useMemo, useRef, useState } from 'react'
-import { Canvas} from "@react-three/fiber"
+import React, { useMemo, useRef, useState, useEffect } from 'react'
+import { Canvas } from "@react-three/fiber"
 import { AdaptiveDpr, PresentationControls, useBVH } from "@react-three/drei"
 import { config } from "./config"
-import { GlViewer } from "./styles"
+import { BigCircleStyles, GlViewer, SmallCircleStyles } from "./styles"
 import { LoadModels } from './LoadModels'
 import { ResizerCamera } from './ResizerCamera'
 import { PointLight } from './PointLight'
+import gsap from 'gsap/all'
 
 
 export const WebGLViewer = () => {
@@ -13,7 +14,6 @@ export const WebGLViewer = () => {
   // useBVH(rayCastMesh)
 
   const target = useRef(null)
-
     /**Load 3d object and 3dpoint clouds */
     const [json, setJson] = useState('json_models/model_01.json')
     
@@ -23,12 +23,46 @@ export const WebGLViewer = () => {
         return jsonReader.readJson(json);
       }, [json]);
    
-   
+      const handleMove = (e) => {
+
+        
+          const circle = document.getElementById('circle')
+        const radiusSize =  config.mouse.size.substring(0,2) /2
+        
+        gsap.to(
+          circle.style,{
+              duration: config.mouse.followTime,
+              left:(e.clientX- radiusSize) + 'px',
+              top:(e.clientY-radiusSize) + 'px'
+          }
+      )
+      const sCircle = document.getElementById('smallCircle')
+      gsap.to(
+        sCircle.style,{
+            duration: config.mouse.followTime /2,
+            left:(e.clientX) + 'px',
+            top:(e.clientY) + 'px'
+        }
+    )
+        
+      }
+      
+      useEffect(() => {
+        const circle = document.getElementById('circle') 
+        circle.style.left = 0 + 'px'
+        circle.style.top = 0 + 'px'
+        const sCircle = document.getElementById('smallCircle') 
+        sCircle.style.left = 0 + 'px'
+        sCircle.style.top = 0 + 'px'
+    }, [])
 
     return (
-        <div>
-            <GlViewer>
+        <>
+          <BigCircleStyles id='circle' className='circle'/>
+          <SmallCircleStyles id='smallCircle' />
+            <GlViewer onMouseMove={handleMove}>
             <Canvas 
+            
             shadows
             camera={{ fov: 75, position: [
               config.camera.position.x, 
@@ -72,6 +106,6 @@ export const WebGLViewer = () => {
           </PresentationControls>
           </Canvas>
             </GlViewer>
-        </div>
+        </>
     )
 }

@@ -9,6 +9,10 @@ export const config ={
             secondary:'#1e1d1d'
         }
     },
+    mouse:{
+        size: '80px',
+        followTime: 0.5
+    },
     assets:{
         introduce:{
             duration:2,
@@ -24,7 +28,7 @@ export const config ={
         },
         debugMode:true,
         alpha:true,
-        pixelRatio: 2,
+        pixelRatio: 1,
         drawing_buffer:false,
         AlwaysRefreshMesh: true //Always or only when users change something
 
@@ -32,8 +36,8 @@ export const config ={
     camera:{
         position:{
             x:0,
-            y:10, //up position
-            z:20 //distance
+            y:15, //up position
+            z:15 //distance
             },
         clipping:{
             near:0.001,
